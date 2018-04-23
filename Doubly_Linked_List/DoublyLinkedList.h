@@ -6,13 +6,14 @@ class DoublyLinkedList {
 	private:
 		struct Node{
 			T data;
-			typename DoublyLinkedList<T>::Node *next, *prev;
+			Node *next, *prev;
 		};
-		typename DoublyLinkedList<T>::Node *head, *tail;
+		Node *head, *tail;
 	public:
 		DoublyLinkedList();
 		~DoublyLinkedList();
 		bool isEmpty();
+		void pushFront(T val);
 };
 
 template<class T>
@@ -24,7 +25,7 @@ DoublyLinkedList<T>::DoublyLinkedList() {
 template<class T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
 	if(!isEmpty()) {
-		typename DoublyLinkedList<T>::Node *temp;
+		Node *temp;
 		while(head != nullptr) {
 			temp = head;
 			head = head->next;
@@ -36,6 +37,11 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
 template<class T>
 bool DoublyLinkedList<T>::isEmpty() {
 	return (head == nullptr && tail == nullptr);
+}
+
+template<class T>
+void DoublyLinkedList<T>::pushFront(T val) {
+
 }
 
 #endif /* DOUBLYLINKEDLIST_H */
