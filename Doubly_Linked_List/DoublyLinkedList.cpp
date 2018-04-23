@@ -22,9 +22,3 @@ template<class T>
 bool DoublyLinkedList<T>::isEmpty() {
 	return (head == nullptr && tail == nullptr);
 }
-
-int main() {
-	DoublyLinkedList<int> dll;
-	std::cout << "List is empty: " << dll.isEmpty() << std::endl;
-	return 0;
-}

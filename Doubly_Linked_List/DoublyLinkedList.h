@@ -1,8 +1,6 @@
 #ifndef DOUBLYLINKEDLIST_H
 #define DOUBLYLINKEDLIST_H
 
-#include <iostream>
-
 template<class T>
 class DoublyLinkedList {
 	private:
@@ -16,6 +14,5 @@ class DoublyLinkedList {
 		~DoublyLinkedList();
 		bool isEmpty();
 };
-
 
 #endif /* DOUBLYLINKEDLIST_H */

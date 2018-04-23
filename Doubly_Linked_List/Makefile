@@ -4,9 +4,12 @@ EXECUTABLE = DLL
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): DoublyLinkedList.o
-	$(CC) $(CFLAGS) DoublyLinkedList.o -o $(EXECUTABLE)
-DoublyLinkedList.o: DoublyLinkedList.cpp
-	$(CC) $(CFLAGS) -c DoublyLinkedList.cpp
+$(EXECUTABLE): Driver.o DoublyLinkedList-impl.o
+	$(CC) $(CFLAGS) Driver.o DoublyLinkedList-impl.o -o $(EXECUTABLE)
+Driver.o: Driver.cpp
+	$(CC) $(CFLAGS) -c Driver.cpp
+DoublyLinkedList-impl.o: DoublyLinkedList-impl.cpp
+	$(CC) $(CFLAGS) -c DoublyLinkedList-impl.cpp
+
 clean:
 	rm -rf *.o *.gch *~ DLL
