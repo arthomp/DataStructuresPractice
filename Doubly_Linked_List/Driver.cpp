@@ -22,12 +22,24 @@ int main() {
 	dll.pushBack(3);
 	dll.printList();
 
-	std::cout << "Deleting head node (popBack)..." << std::endl;
+	std::cout << "Reversing list (reverse)..." << std::endl;
+	dll.reverse();
+	dll.printList();
+
+	std::cout << "Deleting tail node (popBack)..." << std::endl;
 	dll.popBack();
+	dll.printList();
+
+	std::cout << "Reversing list (reverse)..." << std::endl;
+	dll.reverse();
 	dll.printList();
 
 	std::cout << "Deleting head node (popFront)..." << std::endl;
 	dll.popFront();
+	dll.printList();
+
+	std::cout << "Reversing list (reverse)..." << std::endl;
+	dll.reverse();
 	dll.printList();
 
 	std::cout << "Deleting head node (popFront)..." << std::endl;
