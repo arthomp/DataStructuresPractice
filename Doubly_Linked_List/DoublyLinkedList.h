@@ -10,18 +10,17 @@ class DoublyLinkedList {
 		Node *head, *tail;
 		int length;
 	public:
+		class Iterator;
 		DoublyLinkedList();
 		~DoublyLinkedList();
-		bool isEmpty();
-		int getLength();
-		bool checkValidity();
-		void printList();
-		void pushFront(T val);
-		void pushBack(T val);
+		bool isEmpty() const;
+		int getLength() const;
+		void printList() const;
+		void pushFront(const T val);
+		void pushBack(const T val);
 		void popFront();
 		void popBack();
 		void reverse();
-		class Iterator;
 		Iterator begin();
 		Iterator end();
 };
@@ -44,7 +43,9 @@ class DoublyLinkedList<T>::Iterator {
 		Iterator operator++(int);
 		Iterator& operator--();
 		Iterator operator--(int);
-		T& operator*();
+		T& operator*() const;
+		bool operator==(const Iterator& other) const;
+		bool operator!=(const Iterator& other) const;
 };
 
 template<typename T>
@@ -79,8 +80,18 @@ typename DoublyLinkedList<T>::Iterator DoublyLinkedList<T>::Iterator::operator--
 }
 
 template<typename T>
-T& DoublyLinkedList<T>::Iterator::operator*() {
+T& DoublyLinkedList<T>::Iterator::operator*() const {
 	return current->data;
+}
+
+template<typename T>
+bool DoublyLinkedList<T>::Iterator::operator==(const Iterator& other) const {
+	return current == other.current;
+}
+
+template<typename T>
+bool DoublyLinkedList<T>::Iterator::operator!=(const Iterator& other) const {
+	return current != other.current;
 }
 
 template<typename T>
@@ -98,52 +109,19 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
 }
 
 template<typename T>
-bool DoublyLinkedList<T>::isEmpty() {
+bool DoublyLinkedList<T>::isEmpty() const {
 	return (length == 0);
 }
 
 template<typename T>
-int DoublyLinkedList<T>::getLength() {
+int DoublyLinkedList<T>::getLength() const {
 	return length;
 }
 
-template<typename T>
-bool DoublyLinkedList<T>::checkValidity() {
-	if(isEmpty()) {
-		return true;
-	} else if(getLength() == 1) {
-		return ((head == tail) && ((head->prev == nullptr) && (head->next == nullptr)));
-	} else {
-		// check validity of head
-		if(head->prev != nullptr || head->next == nullptr) {
-			return false;
-		}
-		//check validity of between nodes
-		int nodesChecked = 1;
-		Node *last = head;
-		Node *curr = head->next;
-		while(curr != tail) {
-			if(curr->prev != last || curr->next == nullptr) {
-				return false;
-			}
-			curr = curr->next;
-			last = last->next;
-			nodesChecked++;
-		}
-		// check validity of tail
-		if(tail->prev != last || tail->next != nullptr) {
-			return false;
-		}
-		nodesChecked++;
-		if(getLength() != nodesChecked) {
-			return false;
-		}
-		return true;
-	}
-}
+
 
 template<typename T>
-void DoublyLinkedList<T>::printList() {
+void DoublyLinkedList<T>::printList() const {
 	std::cout << "---------------------" << std::endl;
 	if(isEmpty()) {
 		std::cout << "List is empty!" << std::endl;
@@ -164,7 +142,7 @@ void DoublyLinkedList<T>::printList() {
 }
 
 template<typename T>
-void DoublyLinkedList<T>::pushFront(T val) {
+void DoublyLinkedList<T>::pushFront(const T val) {
 	Node *temp = new Node();
 	temp->data = val;
 	if(isEmpty()) {
@@ -182,7 +160,7 @@ void DoublyLinkedList<T>::pushFront(T val) {
 }
 
 template<typename T>
-void DoublyLinkedList<T>::pushBack(T val) {
+void DoublyLinkedList<T>::pushBack(const T val) {
 	Node *temp = new Node();
 	temp->data = val;
 	if(isEmpty()) {
